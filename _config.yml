@@ -1,3 +1,16 @@
-theme: jekyll-theme-dinky
+remote_theme: clearpathrobotics/jekyll-rtd-theme
+
 title: "RAS 598: Mobile Robotics - Course Website"
 description: "Course Website for RAS 598: Mobile Robotics"
+
+# Site Settings
+title: My Project Documentation
+description: A short description of your project.
+
+# Theme Plugins (Supported by GitHub Pages)
+plugins:
+  - jekyll-remote-theme
+  - jekyll-github-metadata
+  - jemoji
+  - jekyll-avatar
+  - jekyll-mentions
