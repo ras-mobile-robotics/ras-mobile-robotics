@@ -1,6 +1,13 @@
-# ras-mobile-robotics
+# Course Website for RAS 598: Mobile Robotics as ASU
 
-Course Website for RAS 598: Mobile Robotics as ASU
+## Course Description
+This graduate course explores the fundamental algorithms and mathematical frameworks that enable autonomous mobile robots to perceive, reason, and act in complex environments. The curriculum bridges theory with practical implementation, covering kinematics, sensor fusion, Bayesian estimation, probabilistic localization, mapping, and motion planning. A strong emphasis is placed on hands-on experience through programming labs and a final team project using the Robot Operating System (ROS).
+
+## Timing
+M/W 3:00 PM - 4:15 PM
+
+## Location
+Poly - ISTB12, Room 212
 
 # Course Schedule
 ```warning
