@@ -6,7 +6,7 @@ sort: 1
 
 ```danger
 ## Under Construction
-This guide is currently being updated for the <strong>Spring 2026</strong> semester. Please note that some text and terminal commands may change before the final release.
+This guide is currently being updated for the **Spring 2026** semester. Please note that some text and terminal commands may change before the final release.
 ```
 
 This guide covers the configuration of the your **Host Computer**. The  This ensures stable communication in a shared classroom network environment. 

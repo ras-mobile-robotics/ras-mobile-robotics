@@ -1,0 +1,31 @@
+# Jekyll defaults
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+
+# Dev
+Gemfile.lock
+Gemfile
+
+# docker
+docker-compose.yml
+
+# Ruby/Bundler
+# We ignore vendor because Docker/Bundler re-installs them inside the container
+vendor/
+.bundle/
+bin/
+
+# Log files
+*.log
+
+# OS specific (Arch/Linux/macOS)
+.DS_Store
+.thumbs.db
+*~
+*.swp
+
+# Environment/Secrets
+.env
+.env.local

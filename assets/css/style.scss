@@ -1,0 +1,19 @@
+/* Target the right-hand content area */
+.wy-nav-content-wrap {
+    background: #1a1a1b !important; /* Dark grey/black background */
+}
+
+.wy-nav-content {
+    background: #1a1a1b !important;
+    color: #e1e1e1 !important; /* Light grey text */
+}
+
+/* Adjust headings to be visible on dark background */
+.rst-content h1, .rst-content h2, .rst-content h3, .rst-content h4 {
+    color: #ffffff !important;
+}
+
+/* Optional: Adjust the horizontal rules and table borders */
+.rst-content hr {
+    border-top: 1px solid #444;
+}
