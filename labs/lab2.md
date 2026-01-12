@@ -20,6 +20,7 @@ After the VM reboots, you must configure your specific TurtleBot 4 hardware via 
 SSH (Secure Shell) is the industry-standard method for connecting to a remote computer (like your TurtleBot 4 or a VM) over a network. It encrypts all traffic to prevent eavesdropping.
 
 ---
+
 > **Credentials**
 > * **User:** `eva`
 > * **Password:** `wall-E`

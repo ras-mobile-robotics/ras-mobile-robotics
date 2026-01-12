@@ -52,6 +52,7 @@ Subject to change based on class size, group formation, and lab availability
 | 17 | May 4 | M |  |  |  |  |
 | 18 | May 6 | M |  |  |  | Report: Finalize Ideas |
 
+---
 
 # Grading Policy
 ## Course Policy: Mastery & Iterative Engineering

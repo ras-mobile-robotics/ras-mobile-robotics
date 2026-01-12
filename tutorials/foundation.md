@@ -5,9 +5,11 @@ parent: Tutorials
 sort: 1
 ---
 # The Foundation: Linux, Distros & ROS
+
 > Estimated Reading Time: 15 mins
 
 Before diving into robotic algorithms, you need to understand the "brain" (Linux) and the "language" (ROS) we use to communicate with it.
+
 ---
 
 ## 1. What is Linux?
@@ -45,6 +47,7 @@ Most distros are actually descendants of three "ancestor" projects:
 - **Arch:** The base for ultra-customizable "bleeding edge" systems.
 
 > TIP: It's worth taking a quick look at the [Linux Family Tree](https://en.wikipedia.org/wiki/List_of_Linux_distributions) 
+
 ---
 
 ## 2. What was ROS 1?
@@ -54,6 +57,7 @@ The **Robot Operating System (ROS)** is "Middleware" i.e. software that helps di
 ROS 1 relied on a central process called the **ROS Master**. 
 - **The Problem:** If the Master crashed, the entire robot failed. 
 - **The Network:** It was designed for a single robot on a stable, wired connection.
+
 ---
 
 ## 3. What is ROS 2?
@@ -63,6 +67,7 @@ ROS 2 is the modern successor to ROS 1, built to handle real-world challenges li
 1.  **No Single Point of Failure:** There is no "Master." Nodes find each other via peer-to-peer discovery.
 2.  **DDS (Data Distribution Service):** Uses industrial standards for high-speed, reliable data transfer.
 3.  **Security:** Includes built-in support for encryption and authentication.
+
 ---
 
 ### Summary: The Main Differences
@@ -140,11 +145,11 @@ We are using a [TurtleBot 4 Lite](https://en.wikipedia.org/wiki/TurtleBot) in th
 ---
 
 ### Learn More:
-* [Official Ubuntu Tutorials](https://ubuntu.com/tutorials/command-line-for-beginners)
-* [The Linux Command Line (Free Book)](https://linuxcommand.org/tlcl.php)
-* [Linux Foundation Training](https://training.linuxfoundation.org/)
-* [Official ROS 2 Documentation](https://docs.ros.org/en/jazzy/index.html)
-* [ROS 2 Tutorials (Beginner to Advanced)](https://docs.ros.org/en/jazzy/Tutorials.html)
-* [TurtleBot 4 User Manual](https://turtlebot4.github.io/turtlebot4-user-manual/)
+- [Official Ubuntu Tutorials](https://ubuntu.com/tutorials/command-line-for-beginners)
+- [The Linux Command Line (Free Book)](https://linuxcommand.org/tlcl.php)
+- [Linux Foundation Training](https://training.linuxfoundation.org/)
+- [Official ROS 2 Documentation](https://docs.ros.org/en/jazzy/index.html)
+- [ROS 2 Tutorials (Beginner to Advanced)](https://docs.ros.org/en/jazzy/Tutorials.html)
+- [TurtleBot 4 User Manual](https://turtlebot4.github.io/turtlebot4-user-manual/)
 
 

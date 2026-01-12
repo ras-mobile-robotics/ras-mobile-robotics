@@ -104,8 +104,8 @@ Use these steps to ensure your work is saved and the virtual "disk" stays health
 
 #### **The Method (Same for both)**
 
-* **GUI:** Top-right corner icon → **Power Off / Log Out** → **Power Off**.
-* **Terminal:** Open with `Ctrl`+`Alt`+`T` and type: `sudo shutdown now`.
+- **GUI:** Top-right corner icon → **Power Off / Log Out** → **Power Off**.
+- **Terminal:** Open with `Ctrl`+`Alt`+`T` and type: `sudo shutdown now`.
 
 #### **The VMware Interface**
 
@@ -151,4 +151,5 @@ This lab bridges the gap between basic setup and custom robot control. By using 
 3. **Validation:** Run both nodes in separate terminals. You should see "Hello World" messages streaming across.
 
 > Tip: Use the "Beginner: CLI Tools" to have a more in-depth understanding of the ROS2 Design and ROS2 CLI tools. 
+
 ---
