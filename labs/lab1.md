@@ -121,7 +121,7 @@ In Ubuntu 24.04 VM,
 Password for keyring: `wall-e`. This is **ONLY** when the keyring password is requested in a GUI window. For example, when you start VS Code after a reboot.
 ```
 
-Note> Make sure you change the display settings to match the resolution and scaling required for your monitor.
+> Note: Make sure you change the display settings to match the resolution and scaling required for your monitor.
 
 1. Open a terminal using the Tilix application on the Ubuntu global menu. 
 > Tilix is a tiling terminal emulator for Linux that allows you to organize multiple terminal sessions into a single window using a flexible grid layout.
