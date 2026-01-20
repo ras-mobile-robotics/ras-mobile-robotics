@@ -77,15 +77,48 @@ Your grade will be based on the following:
 - Live Modification: Demonstrate code proficiency by making small, real-time changes to your logic.
 
 ## PART 1: VM Setup
-Install VMWare Workstation (Windows/Linux) or VMWare Fusion 25H2 (MacOS) from [here](https://knowledge.broadcom.com/external/article/368667/download-and-license-vmware-desktop-hype.html). The Host computer will run an Ubuntu 24.04 VM using VMWare. ROS 2 Jazzy FastDDS (along with a lot of useful tools) is installed in the Ubuntu VM.
+Install VMware Workstation (Windows/Linux) or VMware Fusion 25H2 (macOS) from [here](https://knowledge.broadcom.com/external/article/368667/download-and-license-vmware-desktop-hype.html). The Host computer will run an Ubuntu 24.04 VM using VMware. ROS 2 Jazzy FastDDS (along with a lot of useful tools) is installed in the Ubuntu VM.
 
 > Note: The download process is a bit annoying. You will need to create an account first (Click on Login -> Register). After logging in, click on "My Downloads", search for the right software, Check on "Terms and Conditions", and then finally download it. 
 
 
 ### 1. Importing the VM
-1.  Open VMware (Workstation, Player, or Fusion).
-2.  Select **File > Open** and choose the provided `.ova` file.
-3.  If VMware asks if "_This virtual machine might have been moved or copied._", Select "_I copied it_"
+
+
+<div class="tab-container">
+
+  <input type="radio" name="vm-tabs-top3" id="tab-win-top3" checked>
+  <label for="tab-win-top3">Windows/Linux</label>
+  <div class="tab-content" markdown="1">
+
+1. The download link is available in the [Canvas Home Page](https://canvas.asu.edu/courses/249083) under **VM Files**. 
+2. Download the **Windows/Linux (x64)** `.ova` file.
+3. Right click on the downloaded `.ova` file and open with VMware Workstation.
+ > If VMware asks if "_This virtual machine might have been moved or copied._", Select "_I copied it_"
+4. Follow the instructions on the Import dialog to successfully setup the VM.
+
+
+  </div>
+
+  <input type="radio" name="vm-tabs-top3" id="tab-mac-top3">
+  <label for="tab-mac-top3">Mac</label>
+  <div class="tab-content" markdown="1">
+
+1. The download link is available in the [Canvas Home Page](https://canvas.asu.edu/courses/249083) under **VM Files**. 
+2. Download the **macOS (Apple Silicon ARM64)** `.ova` file.
+3. Right click on the downloaded `.ova` file and open with VMware Fusion.
+  > If VMware asks if "_This virtual machine might have been moved or copied._", Select "_I copied it_"
+4. Follow the instructions on the Import dialog to until you reach the Finish screen.
+5. Before you click **Finish** and try to start it, in the Import Wizard, look for a button that says Customize Settings.
+6. Go to **General**.
+7. Check the **OS Type**. Ensure it says Ubuntu 64-bit Arm (not just "Ubuntu 64-bit", which usually implies Intel/AMD x86).
+
+  </div>
+
+</div>
+
+
+
 
 ### 2. Optimizing Hardware Settings
 Before clicking "Power On," select **Edit Virtual Machine Settings** and apply these optimizations:
@@ -192,7 +225,7 @@ To shutdown safely, there are two ways to ensure your work is saved and the virt
 ---
 
 ```note
-Take some time to learn how to use VMWare and the Ubuntu OS.
+Take some time to learn how to use VMware and the Ubuntu OS.
 ```
 
 ## PART 2: ROS 2 Publisher and Subscriber
