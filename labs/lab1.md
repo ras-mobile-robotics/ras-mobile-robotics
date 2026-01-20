@@ -71,7 +71,7 @@ This guide covers the configuration of the the Ubuntu VM. Then by using the offi
 - ROS2 Basics: Creating a workspace, compiling code, and implementing the Publisher/Subscriber pattern to communicate between nodes.
 
 #### Evaluation
-Your grade will be based on a live demonstration and a technical interview covering:
+Your grade will be based on the following:
 - Live Demo: Show your Publisher and Subscriber nodes communicating successfully.
 - Oral Examination: Explain how the Publisher/Subscriber pattern works and how you configured your nodes.
 - Live Modification: Demonstrate code proficiency by making small, real-time changes to your logic.
@@ -85,7 +85,7 @@ Install VMWare Workstation (Windows/Linux) or VMWare Fusion 25H2 (MacOS) from [h
 ### 1. Importing the VM
 1.  Open VMware (Workstation, Player, or Fusion).
 2.  Select **File > Open** and choose the provided `.ova` file.
-3.  If VMware asks if *"This virtual machine might have been moved or copied.", Select "_I copied it_"
+3.  If VMware asks if "_This virtual machine might have been moved or copied._", Select "_I copied it_"
 
 ### 2. Optimizing Hardware Settings
 Before clicking "Power On," select **Edit Virtual Machine Settings** and apply these optimizations:
@@ -106,8 +106,10 @@ Before clicking "Power On," select **Edit Virtual Machine Settings** and apply t
 1. Go to [Canvas](https://canvas.asu.edu/courses/249083/) and click on **Grades**.
 2. You should see a score for the Assignment **Lab Student ID**. The score is your **Lab Student ID**.
 
+```note
 For example, in the below screenshot of the Grades Page, the **Lab Student ID** is **40** (Ignore the "/0").
-![Example Student ID](../assets/images/example_student_id.png)
+![Example Student ID](../assets/images/example_student_id.png){: width="600" }
+```
 
 ### 4: First Boot
 
