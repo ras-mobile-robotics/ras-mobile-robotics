@@ -74,7 +74,6 @@ Run the following command to generate a PDF of the robot's hierarchy:
 
 ```bash
 ros2 run tf2_tools view_frames
-
 ```
 
 This generates a PDF of the entire tf tree. Take a look at it! If you are not sure how to open the file, this is a good opportunity to explore your VM interaction skills.
