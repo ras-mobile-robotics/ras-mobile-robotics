@@ -4,15 +4,134 @@ title: "Virtual Machine"
 parent: Tutorials
 sort: 2
 ---
-# Clean colcon 
-ROS2 logs might take a large amount of disk space over time.
-Clean the workspace log folder by running: `colcon clean log`
 
-# Expand VM Hard Disk
-Expanding your disk on an Ubuntu 24.04 VM involves two main stages: increasing the "hardware" limit in VMware and then using the built-in GUI to claim that space for `/dev/sda2` (the disk that the Ubuntu VM uses).
+## Enable 3D Hardware Acceleration
+
+In a robotics context, "Hardware Acceleration" typically refers to offloading computation from the CPU to the GPU. It is essential for:
+
+* **Gazebo / Isaac Sim (Simulation):** These physics engines calculate light, shadows, and physics collisions. Software rendering makes real-time simulation impossible.
+* **RViz2 (Visualization):** RViz2 uses **OpenGL** to render complex sensor data (point clouds, robot models, laser scans). Without acceleration, the CPU must emulate these graphics ("Software Rendering"), leading to massive lag.
+
 ---
 
-## Phase 1: Increase Disk Size in VMware Player
+### Setup Guide
+
+1. Make sure you shutdown (cleanly) the VM.
+2. Change the **VM Settings:**
+    - **Display:** Check **Accelerate 3D graphics**.
+    - **Graphics Memory:** Set to at least **2GB** (recommended for ROS 2).
+
+    > **Note:** If your hardware has limited VRAM (less than 2GB), set this value to the maximum VRAM allowed by your slider.
+
+3. Boot into the VM, run the following command to install Open VM Tools:
+
+    ```bash
+    sudo apt update && sudo apt install open-vm-tools-desktop
+    ```
+
+3. **Reboot** the VM.
+
+`open-vm-tools-desktop` is a package that optimizes the user experience when running a Linux VM (the "Guest") inside a hypervisor like VMware (the "Host"). It enables the "quality of life" features you see in the GUI:
+- Shared Clipboard: Enables Copy & Paste between your host computer and the VM.
+- Drag and Drop: Allows you to drag files directly into the VM window.
+- Improved Graphics: Includes drivers that help the VM communicate with your physical GPU for the 3D acceleration mentioned earlier in your guide.
+
+---
+
+### Verification & Troubleshooting 
+
+#### 1. Verify 3D Hardware Acceleration is Active
+
+Run this command in the terminal:
+
+```bash
+glxinfo | grep "direct rendering"
+```
+
+* **Success:** It should say `Yes`.
+* **Failure:** If it says `No` or the command is missing, run `sudo apt install mesa-utils` first.
+
+Check the renderer being used:
+
+```bash
+glxinfo | grep "renderer string"
+
+```
+
+* **Good:** `SVGA3D` (VMware) or `VMware7` (VirtualBox).
+* **Bad:** `llvmpipe` (This means it's using the CPU for graphics, which causes lag).
+
+#### 2. The "Black Screen" or "Flickering" Fix (Ubuntu 24.04 Specific)
+
+If you see a black screen or weird visual artifacts:
+
+1. On the Login screen, click the **Gear Icon** in the bottom right.
+2. Select **Ubuntu on Xorg**.
+3. Log in. This uses the older X11 window system, which is much more stable for VM 3D drivers.
+
+---
+
+#### 3. Gazebo Simulation Performance
+
+To check the performance, look for the **Real Time Factor (RTF)** at the bottom right corner of the Gazebo window. If you expand the toolbar, you will see `Sim Time`, `Real Time`, and `Iterations`.
+
+**Understanding RTF:**
+
+* **RTF = 1.00:** Perfect performance. 1 second in the simulation equals 1 second in the real world.
+* **RTF < 1.00:** The simulation is lagging ("slow motion").
+* *Example:* An RTF of `0.50` means the simulation is running at half speed (1 sim-second takes 2 real-seconds). This is common in VMs.
+
+
+* **RTF > 1.00:** The simulation is running faster than real-time (fast forward).
+
+**Goal:** In a VM, an RTF between **0.7 and 1.0** is acceptable. If it drops below **0.4**, your robot's navigation stack may time out (see below).
+
+---
+
+#### 4. Controller Timeout Errors
+
+If your RTF is low, you might see repeated warning logs like this in your terminal:
+
+```bash
+[gazebo-1] [WARN] [diffdrive_controller]: Ignoring the received message (timestamp 38.08) because it is older than the current time by 0.50 seconds...
+```
+
+**What this means:**
+The robot's safety controller expects commands (`cmd_vel`) to arrive instantly. Because your VM is lagging, the commands are arriving "late" (older than the 0.5s safety limit), so the robot ignores them to prevent dangerous behavior.
+
+**The Fix:**
+You need to increase the timeout tolerance.
+
+1. Open the configuration file (you will need `sudo`):
+```bash
+sudo nano /opt/ros/jazzy/share/irobot_create_control/config/control.yaml
+```
+2. Find the parameter `cmd_vel_timeout` (default is usually `0.5`).
+3. Change it to `2.5` (or higher if the warnings persist).
+4. Save and exit (`Ctrl+O`, `Enter`, `Ctrl+X`), then restart the simulation.
+
+---
+
+#### 5. Other Common Issues
+
+* **Laptop Power Settings:** Make sure your laptop is plugged into power and your OS power mode is set to **"High Performance"**. Windows 11 often throttles the GPU on battery, which effectively "breaks" the 3D bridge to the VM.
+
+---
+
+## Expand VM Hard Disk
+
+```tip
+ROS2 logs might take a large amount of disk space over time.
+Clean the workspace log folder by running: `colcon clean log`. If that does not free up space, proceed with the turotial to expand your VM disk.
+```
+
+Expanding your disk on an Ubuntu 24.04 VM involves two main stages: increasing the "hardware" limit in VMware and then using the built-in GUI to claim that space for `/dev/sda2` (the disk that the Ubuntu VM uses).
+
+```warning
+Backup your code/data in the VM before you proceed.
+```
+
+### Phase 1: Increase Disk Size in VMware Player
 
 You must perform these steps while the Virtual Machine is completely powered off.
 
@@ -25,7 +144,7 @@ You must perform these steps while the Virtual Machine is completely powered off
 
 ---
 
-## Phase 2: Resize `/dev/sda2` using GParted
+### Phase 2: Resize `/dev/sda2` using GParted
 
 Once Ubuntu boots up, it will see the extra space as "Unallocated," meaning it isn't assigned to any partition yet.
 
@@ -41,20 +160,20 @@ Once Ubuntu boots up, it will see the extra space as "Unallocated," meaning it i
 
 ---
 
-## Phase 3: Verification
+### Phase 3: Verification
 To ensure your ROS 2 environment and system tools now have access to the full space, you can quickly check the disk status:
 
 * Open the **"Disk Usage Analyzer"** (standard on Ubuntu) to see the new capacity.
 * Alternatively, run `df -h /` in the terminal to see the updated size for your root directory.
 
 
-# Essential Command Line Interface (CLI) Toolkit for ROS 2
+## Essential Command Line Interface (CLI) Toolkit for ROS 2
 
 This guide covers the fundamental tools you need to navigate, search, and manage remote sessions effectively.
 
 ---
 
-## 1. SSH (Secure Shell)
+### 1. SSH (Secure Shell)
 SSH is used to log into a remote computer (like your TurtleBot 4) securely.
 
 - **The Command:** `ssh username@ip_address`
@@ -63,7 +182,7 @@ SSH is used to log into a remote computer (like your TurtleBot 4) securely.
 
 ---
 
-## 2. Bash & Basic Commands
+### 2. Bash & Basic Commands
 **Bash** (Bourne Again SHell) is the command-line interpreter you see in the terminal. It is the language you use to tell the OS what to do.
 
 ### Core Commands:
@@ -75,10 +194,10 @@ SSH is used to log into a remote computer (like your TurtleBot 4) securely.
 - `cat [file]`: **Concatenate**. Displays the text inside a file in the terminal.
 
 ---
-## 3. Useful Tools
+### 3. Useful Tools
 The VM also has a bunch of CLI tools that makes dev lives easier. 
 
-### 1. fd-find (`fd`)
+#### 1. fd-find (`fd`)
 `fd` is a simple, fast, and user-friendly alternative to the standard `find` command.
 
 - **Quick Start:** `fd my_node`
@@ -87,7 +206,7 @@ The VM also has a bunch of CLI tools that makes dev lives easier.
 
 ---
 
-### 2. ripgrep (`rg`)
+#### 2. ripgrep (`rg`)
 `rg` is the world's fastest tool for searching **inside** files for specific text.
 
 - **Quick Start:** `rg "Namespace"`
@@ -95,7 +214,7 @@ The VM also has a bunch of CLI tools that makes dev lives easier.
 
 ---
 
-### 3. autojump (`j`)
+#### 3. autojump (`j`)
 `autojump` learns your habits so you can navigate your filesystem faster.
 
 - **Quick Start:** `j my_robot_pkg`
@@ -104,13 +223,13 @@ The VM also has a bunch of CLI tools that makes dev lives easier.
 
 ---
 
-### 4. tmux (Terminal Multiplexer)
+#### 4. tmux (Terminal Multiplexer)
 `tmux` is essential for ROS development and SSH. It allows you to run multiple terminal windows inside one connection and keeps them running even if your WiFi drops. It also allows you to create mutliple terminal windows easily without having to SSH a new terminal every time.
 
-#### Why it's critical for SSH/ROS:
+##### Why it's critical for SSH/ROS:
 If you are driving a robot via SSH and your WiFi blips, a normal session will die—and the robot might keep driving! If you use `tmux` (a terminal program), the process keeps running on the robot even if you lose connection.
 
-#### Your Config Shortcuts:
+##### Your Config Shortcuts:
 Once you start tmux, press your **Prefix** key (`Ctrl+b`) then the key:
 
 - `|` : Split the screen **Horizontally**.
@@ -119,13 +238,18 @@ Once you start tmux, press your **Prefix** key (`Ctrl+b`) then the key:
 - `x` : Create a **New Tab** (Custom config).
 - `s` : **Switch Sessions**. Switch between different tmux sessions.
 
-### Attaching:
+#### Attaching:
 If your terminal closes, just log back in and type:
 `tmux a`
 This "attaches" you back to your last session exactly where you left off.
 ---
 
-### Tools Mentioned in Other Guides:
+
+
+
+
+
+### Tools Mentioned in Other Guides
 - [fd-find GitHub](https://github.com/sharkdp/fd)
 - [ripgrep (rg) GitHub](https://github.com/BurntSushi/ripgrep)
 - [autojump (j) Documentation](https://github.com/wting/autojump)
