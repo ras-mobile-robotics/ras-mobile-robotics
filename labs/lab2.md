@@ -4,20 +4,16 @@ title: "Simulation"
 sort: 2
 ---
 
-By the end of this lab, you will learn how to run a full 3D simulation on your own computer and how to interact with the ROS tf2 library using CLI tools and the Python API.
-
----
-
 # Lab 2: Coordinate Frames and Simulation
+By the end of this lab, you will learn how to run a full 3D simulation on your own computer and how to interact with the ROS tf2 library using CLI tools and the Python API.
 
 ## Learning Objectives:
 * Complete the official ROS 2 Jazzy TF2 Python tutorials.
 * Run the TurtleBot 4 Gazebo simulation.
-* Inspect the TurtleBot 4 coordinate tree using CLI tools.
-
+* Inspect the TurtleBot 4 tf tree using CLI tools.
 
 ```note
-In the lab, you will be testing the VM's limits. Much of the configuration, tuning, and debugging involves setting up your environment to run Task 1 (the simulator), as every student's computer has a different configuration. Use online resources, LLMs, and office hours to help get the simulator up and running.
+In this lab, you will be testing the VM's limits on your computer hardware. A lot of your effort might be focussed on the tuning and debugging involved in setting up your environment to run Task 3 (Gazebo simulator). As every student's computer has a different configuration, please use online resources, LLMs, class discussions, and office hours to help get the Gazebo simulator up and running.
 ```
 
 ## Task 1: Complete the ROS TF2 Tutorial
@@ -29,7 +25,7 @@ Before starting the (simulated) robot-specific task, you must complete the follo
 
 ---
 
-## Task 2: Run the simulation
+## Task 2: Run the Gazebo Simulation for Turtlebot4
 In your ROS workspace, clone the simulation git repo:
 ```bash
 git clone https://github.com/ras-mobile-robotics/ras598_sim.git
@@ -62,7 +58,7 @@ It should reply with the message "*Goal finished with status: SUCCEEDED*" and th
 If you had issues with runnning the simulation, the simulation being slow, or seeing a low of warning messages, checkout the VM hardware setup guide [here](../tutorials/vm#enable-3d-hardware-acceleration).
 ```
 
-### Task 3: Robot Teleop
+### Task 3: Robot Teleoperation
 Run the **teleoperation node**:
 
 ```bash
@@ -101,5 +97,5 @@ ros2 run tf2_ros tf2_echo base_link <YOUR_CAMERA_FRAME_NAME>
 
 A short screen recording (~10 secs) each for thew following:
 1. The turtles moving from [Task 1](../labs/lab2#task-1-complete-the-ros-tf2-tutorial).
-2. Turtlebot moving around in Gazebo from [Task 3](../labs/lab2#task-3-robot-teleop).
+2. Turtlebot moving around in Gazebo from [Task 3](../labs/lab2#task-3-robot-teleoperation).
 3. tf tree and the terminal window printing the offest from [Task 5](../labs/lab2#task-5-measuring-the-offset).
