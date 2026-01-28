@@ -55,7 +55,7 @@ ros2 action send_goal /undock irobot_create_msgs/action/Undock "{}"
 It should reply with the message "*Goal finished with status: SUCCEEDED*" and the simulated robot should be undocked.
 
 ```note
-If you had issues with runnning the simulation, the simulation being slow, or seeing a low of warning messages, checkout the VM hardware setup guide [here](../tutorials/vm#enable-3d-hardware-acceleration).
+If you had issues with runnning the simulation, the simulation being slow, or seeing a low of warning messages, checkout the VM guide for [Enable 3D Hardware Acceleration](../tutorials/vm#enable-3d-hardware-acceleration).
 ```
 
 ### Task 3: Robot Teleoperation
